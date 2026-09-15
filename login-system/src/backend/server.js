@@ -1,26 +1,34 @@
 import express from 'express';
 import cors from 'cors';
+import authRoutes from './routes/authRoutes.js';
 
 const app = express();
-const port = 5000;
+const port = 3000;
 
-// Middleware
-app.use(
-  cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
-  })
-);
+// -----------------------------
+// Global Middleware
+// -----------------------------
 
+app.use(cors());
 app.use(express.json());
+app.use('/api/auth', authRoutes);
 
-// Health check
-app.get('/api/health', (req, res) => {
-  res.status(200).json({
+// -----------------------------
+// Test Route
+// -----------------------------
+
+app.get('/', (req, res) => {
+  res.json({
     success: true,
     message: 'API is running',
   });
 });
+
+
+
+// -----------------------------
+// Server
+// -----------------------------
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
