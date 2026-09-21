@@ -26,7 +26,7 @@ function Navbar({ theme, toggleTheme }) {
   };
 
   return (
-    <header className="border-b border-gray-100 bg-gray-950 transition-colors">
+    <header className="border-b border-gray-100 bg-blue-800 transition-colors">
       <nav className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-10">
         {/* Top Navbar */}
         <div className="flex h-16 items-center justify-between">
@@ -60,7 +60,7 @@ function Navbar({ theme, toggleTheme }) {
 
             <NavLink
               to="/register"
-              className="rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
+              className="rounded-lg bg-green-400 px-4 py-2 text-black font-medium transition-colors hover:bg-green-600"
             >
               Sign Up
             </NavLink>
