@@ -15,6 +15,7 @@ function Register() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm();
 
@@ -31,7 +32,7 @@ function Register() {
 
   const onSubmit = async (data) => {
     const response = await registerUser(data); // Clear the form as soon as the backend responds 
-    //reset(); 
+    reset(); 
     if (response.ok) { 
       showResponse(response.message, 'success'); 
       setTimeout(() => { 
