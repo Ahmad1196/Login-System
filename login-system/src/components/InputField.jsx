@@ -1,4 +1,6 @@
 
+import {useTheme} from '../contexts/ThemeContext';
+
 function InputField({
   id,
   label,
@@ -7,11 +9,13 @@ function InputField({
   registration,
   error,
 }) {
+  const { isDark } = useTheme();
+
   return (
     <div>
       <label
         htmlFor={id}
-        className="mb-2 block text-sm font-medium text-gray-700"
+        className={`mb-2 block text-sm font-medium ${isDark ? 'text-gray-300' : 'text-gray-700'}`}
       >
         {label}
       </label>

@@ -65,32 +65,6 @@ function ConfirmModal({
           </button>
         </div>
       </div>
-      
-      <ConfirmModal
-        isOpen={showDeleteListModal}
-        title="Delete todo list?"
-        message={`Are you sure you want to delete "${todoList.title}"? This action cannot be undone.`}
-        onConfirm={handleDelete}
-        onCancel={() => {
-          if (!isDeleting) {
-            setShowDeleteListModal(false);
-          }
-        }}
-        isLoading={isDeleting}
-      />
-
-      <ConfirmModal
-        isOpen={Boolean(deleteTodoId)}
-        title="Delete todo?"
-        message="Are you sure you want to delete this todo? This action cannot be undone."
-        onConfirm={() => handleDeleteTodo(deleteTodoId)}
-        onCancel={() => {
-          if (!isUpdating) {
-            setDeleteTodoId(null);
-          }
-        }}
-        isLoading={isUpdating}
-      />
     </div>
   );
 }

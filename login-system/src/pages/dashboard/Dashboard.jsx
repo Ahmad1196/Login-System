@@ -6,6 +6,7 @@ import {
   getTodoLists,
   updateTodoList,
 } from "../../services/todoService";
+import { useTheme } from "../../contexts/ThemeContext";
 
 function Dashboard() {
   const [todoLists, setTodoLists] = useState([]);
@@ -13,6 +14,7 @@ function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [isCreating, setIsCreating] = useState(false);
   const [error, setError] = useState("");
+  const { isDark } = useTheme();
 
   const fetchTodoLists = useCallback(async () => {
     try {
@@ -125,17 +127,17 @@ function Dashboard() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-white sm:text-3xl">
+        <h1 className={`text-2xl font-bold sm:text-3xl ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>
           Todo Lists
         </h1>
 
-        <p className="mt-2 text-sm text-gray-400">
+        <p className={`mt-2 text-sm ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
           Create and manage your todo lists.
         </p>
       </div>
 
-      <div className="mb-8 rounded-2xl border border-gray-700 bg-gray-900 p-5 shadow-lg sm:p-6">
-        <h2 className="text-lg font-semibold text-white">Create a new list</h2>
+      <div className={`mb-8 rounded-2xl border shadow-lg p-5 sm:p-6 ${isDark ? 'border-gray-600 bg-gray-900' : 'border-gray-200 bg-white'}`}>
+        <h2 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Create a new list</h2>
 
         <form
           onSubmit={handleCreateTodoList}
@@ -146,7 +148,7 @@ function Dashboard() {
             value={title}
             onChange={(event) => setTitle(event.target.value)}
             placeholder="e.g. Work Tasks"
-            className="min-w-0 flex-1 rounded-xl border border-gray-600 bg-gray-800 px-4 py-3 text-sm text-white outline-none transition placeholder:text-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+            className={`min-w-0 flex-1 rounded-xl border px-4 py-3 text-sm outline-none transition ${isDark ? 'border-gray-600 bg-gray-900 placeholder:text-gray-500' : 'border-gray-300 bg-white placeholder:text-gray-400'}  focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10`}
           />
 
           <button
@@ -162,16 +164,16 @@ function Dashboard() {
       </div>
 
       {isLoading ? (
-        <div className="rounded-2xl border border-gray-700 bg-gray-900 p-6">
+        <div className={`rounded-2xl border p-6 ${isDark ? 'border-gray-600 bg-gray-900' : 'border-gray-300 bg-white'}`}>
           <p className="text-sm text-gray-400">Loading your todo lists...</p>
         </div>
       ) : todoLists.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-gray-600 bg-gray-900 p-8 text-center">
-          <h2 className="text-lg font-semibold text-white">
+        <div className={`rounded-2xl border border-dashed p-8 text-center ${isDark ? 'border-gray-600 bg-gray-900' : 'border-gray-300 bg-white'}`}>
+          <h2 className={`text-lg font-semibold ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>
             No todo lists yet
           </h2>
 
-          <p className="mt-2 text-sm text-gray-500">
+          <p className={`mt-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
             Create your first todo list to get started.
           </p>
         </div>

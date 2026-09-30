@@ -5,11 +5,19 @@ import { Link } from "react-router";
 import { registerUser } from "../services/authService";
 import InputField from "../components/InputField";
 import { CgProfile } from "react-icons/cg";
+import { useTheme } from "../contexts/ThemeContext";
 
 function Register() {
   const navigate = useNavigate();
   const [responseMessage, setResponseMessage] = useState("");
   const [responseType, setResponseType] = useState("");
+  const { isDark } = useTheme();
+  const headingClass = isDark ? "text-white" : "text-gray-900";
+  const mutedTextClass = isDark ? "text-gray-200" : "text-gray-500";
+  const dividerClass = isDark ? "border-gray-600" : "border-gray-200";
+  const linkClass = isDark
+    ? "text-blue-500 hover:text-blue-400"
+    : "text-blue-600 hover:text-blue-700";
 
   const {
     register,
@@ -45,10 +53,10 @@ function Register() {
 
   return (
     <>
-      <section className="relative flex min-h-[calc(100vh-64px)] items-center justify-center overflow-hidden px-4 py-10 sm:px-6">
+      <section className="flex min-h-[calc(100vh-64px)] items-center justify-center overflow-hidden px-4 py-10 sm:px-6">
         {/* Registration Card */}
         <div className="relative z-10 w-full max-w-md">
-          <div className="rounded-3xl border border-gray-100 bg-white/90 p-6 backdrop-blur-sm sm:p-8">
+          <div className={`relative rounded-3xl border p-6 backdrop-blur-sm sm:p-8 ${isDark ? 'border-gray-400 bg-gray-700' : 'border-gray-200 bg-gray-100'}`}>
             {/* Profile Image */}
             <div className="mb-6 flex justify-center">
               <div className="relative">
@@ -62,11 +70,11 @@ function Register() {
                 Get started
               </p>
 
-              <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              <h1 className={`text-3xl font-bold tracking-tight ${headingClass} sm:text-4xl`}>
                 Create your account
               </h1>
 
-              <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-gray-500">
+              <p className={`mx-auto mt-3 max-w-sm text-sm leading-6 ${mutedTextClass}`}>
                 Create your account and join us today. It only takes a minute to
                 get started.
               </p>
@@ -144,12 +152,12 @@ function Register() {
             </form>
 
             {/* Login Link */}
-            <div className="mt-7 border-t border-gray-100 pt-6 text-center">
-              <p className="text-sm text-gray-500">
+            <div className={`mt-7 border-t ${dividerClass} pt-6 text-center`}>
+              <p className={`text-sm ${mutedTextClass}`}>
                 Already have an account?{" "}
                 <Link
                   to="/login"
-                  className="font-semibold text-blue-600 transition-colors hover:text-blue-700 hover:underline"
+                  className={`font-semibold transition-colors hover:underline ${linkClass}`}
                 >
                   Login
                 </Link>
@@ -158,7 +166,7 @@ function Register() {
           </div>
 
           {/* Small footer text */}
-          <p className="mt-6 text-center text-xs text-gray-400">
+          <p className={`mt-6 text-center text-xs ${mutedTextClass}`}>
             Your information is securely handled.
           </p>
         </div>

@@ -26,13 +26,10 @@ export const loginUser = async (userData) => {
 };
 
 export const getCurrentUser = async () => {
-  const response = await fetch(
-    `${API_URL}/auth/me`,
-    {
-      method: 'GET',
-      credentials: 'include',
-    }
-  );
+  const response = await fetch(`${API_URL}/auth/me`, {
+    method: "GET",
+    credentials: "include",
+  });
 
   const data = await response.json();
 
@@ -43,13 +40,28 @@ export const getCurrentUser = async () => {
 };
 
 export const logoutUser = async () => {
-  const response = await fetch(
-    `${API_URL}/auth/logout`,
-    {
-      method: 'POST',
-      credentials: 'include',
-    }
-  );
+  const response = await fetch(`${API_URL}/auth/logout`, {
+    method: "POST",
+    credentials: "include",
+  });
+
+  const data = await response.json();
+
+  return {
+    ok: response.ok,
+    ...data,
+  };
+};
+
+export const changePassword = async (passwordData) => {
+  const response = await fetch(`${API_URL}/auth/password`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(passwordData),
+  });
 
   const data = await response.json();
 
